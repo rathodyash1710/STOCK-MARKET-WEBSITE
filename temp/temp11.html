@@ -1,0 +1,16 @@
+<!--search start-->
+<form class="d-flex" role="search" id="search-form">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-space">
+    <button id="search-button" type="button" class="btn btn-primary">
+      <i class="fas fa-search"></i>
+    </button>      
+  </form>
+  
+  <script>
+    document.getElementById('search-button').addEventListener('click', function() {
+      var searchQuery = document.getElementById('search-space').value;
+      // Assuming you want to redirect to a page named "search-results.html" with the search query as a parameter
+      window.location.href = 'search-results.html?q=' + encodeURIComponent(searchQuery);
+    });
+  </script>
+  

@@ -1,0 +1,11 @@
+/* for hoverable dropdown-menu */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* for a mobile view */
+@media (min-width: 768px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Widget</title>
+</head>
+<body>
+
+<label for="companyInput">Enter company name:</label>
+<input type="text" id="companyInput">
+<button onclick="updateWidget()">Update Widget</button>
+
+<div id="widgetContainer"></div>
+
+<script>
+function updateWidget() {
+    var userInput = document.getElementById("companyInput").value.trim();
+    var getUrl = "https://trendlyne.com/web-widget/swot-widget/Poppins/" + userInput + "/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E";
+    
+    var iframe = document.createElement('iframe');
+    iframe.src = getUrl;
+    iframe.style.width = "100%";
+    iframe.style.height = "500px"; // Adjust the height as needed
+    iframe.style.border = "none";
+    
+    var container = document.getElementById("widgetContainer");
+    container.innerHTML = ''; // Clear previous content
+    container.appendChild(iframe);
+}
+</script>
+
+</body>
+</html>

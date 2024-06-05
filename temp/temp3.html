@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data Search</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Stock Data Search</h1>
+    <label for="stockSymbol">Enter Stock Symbol:</label>
+    <input type="text" id="stockSymbol" placeholder="e.g., AAPL">
+    <button id="searchButton">Search</button>
+    <div id="stockData">
+        <!-- Stock data will be displayed here -->
+    </div>
+
+    <script>
+        // Replace 'YOUR_API_KEY' with your actual Alpha Vantage API key
+        const apiKey = 'YOUR_API_KEY';
+
+        $(document).ready(function() {
+            $('#searchButton').click(function() {
+                const symbol = $('#stockSymbol').val().toUpperCase();
+                fetchStockData(symbol);
+            });
+        });
+
+        function fetchStockData(symbol) {
+            $.getJSON(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`)
+                .done(function(data) {
+                    if (data['Global Quote']) {
+                        const priceData = data['Global Quote'];
+                        const price = parseFloat(priceData['05. price']).toFixed(2);
+                        const change = parseFloat(priceData['09. change']).toFixed(2);
+                        const changePercent = parseFloat(priceData['10. change percent']).toFixed(2);
+
+                        const html = `
+                            <h2>${symbol} Stock Data</h2>
+                            <p>Price: $${price}</p>
+                            <p>Change: $${change} (${changePercent}%)</p>
+                        `;
+
+                        $('#stockData').html(html);
+                    } else {
+                        $('#stockData').html(`<p>No data found for symbol ${symbol}.</p>`);
+                    }
+                })
+                .fail(function(jqxhr, textStatus, error) {
+                    const err = textStatus + ", " + error;
+                    console.error("Request Failed: " + err);
+                    $('#stockData').html(`<p>Error fetching data. Please try again later.</p>`);
+                });
+        }
+    </script>
+</body>
+</html>

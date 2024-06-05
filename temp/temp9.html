@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-grid.min.css" integrity="sha512-ZuRTqfQ3jNAKvJskDAU/hxbX1w25g41bANOVd1Co6GahIe2XjM6uVZ9dh0Nt3KFCOA061amfF2VeL60aJXdwwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- My Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        #tradingview-widget-financials{
+            height: 500px !important;
+            width: auto;
+        }
+        #tradingview-widget-technical-analysis{
+            height: 380px !important;
+            width: auto;
+        }
+    </style>
+</head>
+
+<body style="background-color: black;">
+<br>
+<input type="text" id="symbolInput" placeholder="Enter symbol">
+<button onclick="callAllFunctions()">Change Symbol</button>
+
+<div class="container-fluid">
+    <div class="tradingview-widget-container-fluid">
+    </div>
+</div>
+<br>
+
+<div class="container-fluid">
+    <div class="tradingview-widget-container" id="tradingview-widget-financials">
+    </div>
+</div>
+<br>
+
+<div class="container-fluid" id="tradingview-widget-technical-analysis">
+</div>
+<br>
+
+<div class="container-fluid row">
+    <div class="col-sm-6" id="swotanalysisContainer">
+    </div>
+    <div class="col-sm-6" id="qvtnalysisContainer">
+    </div>
+</div>
+
+
+<script>
+    // Function to change symbol for all widgets
+    function callAllFunctions() {
+        var symbol = document.getElementById('symbolInput').value;
+        changeSymbol(symbol);
+        changeSymbolFinancials(symbol);
+        changeSymbolTechnicalAnalysis(symbol);
+        changeSymbolswotAnalysis(); 
+        changeSymbolqvtAnalysis();
+        }
+
+    // Function to replace the symbol in the TradingView widget
+    function changeSymbol(newSymbol) {
+        var scriptTag = document.createElement("script");
+        scriptTag.type = "text/javascript";
+        scriptTag.async = true;
+        scriptTag.src = "https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js";
+        scriptTag.innerHTML = '{ "symbol": "' + newSymbol + '", "width": "100%", "isTransparent": false, "colorTheme": "dark", "locale": "en" }';
+        var container = document.querySelector(".tradingview-widget-container-fluid");
+        container.innerHTML = ""; // Clear previous content
+        container.appendChild(scriptTag);
+    }
+
+    // Function to replace the symbol in the TradingView financials widget
+    function changeSymbolFinancials(newSymbol) {
+        var scriptTag = document.createElement("script");
+        scriptTag.type = "text/javascript";
+        scriptTag.async = true;
+        scriptTag.src = "https://s3.tradingview.com/external-embedding/embed-widget-financials.js";
+        scriptTag.innerHTML = JSON.stringify({
+            "isTransparent": false,
+            "largeChartUrl": "",
+            "displayMode": "regular",
+            "width": "100%",
+            "height": "100%",
+            "colorTheme": "dark",
+            "symbol": newSymbol,
+            "locale": "en"
+        });
+        var container = document.getElementById("tradingview-widget-financials");
+        container.innerHTML = ""; // Clear previous content
+        container.appendChild(scriptTag);
+    }
+
+    // Function to replace the symbol in the TradingView technical analysis widget
+    function changeSymbolTechnicalAnalysis(newSymbol) {
+        var scriptTag = document.createElement("script");
+        scriptTag.type = "text/javascript";
+        scriptTag.src = "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
+        scriptTag.async = true;
+        scriptTag.innerHTML = JSON.stringify({
+            "interval": "1m",
+            "width": "100%",
+            "isTransparent": false,
+            "height": "100%",
+            "symbol": newSymbol,
+            "showIntervalTabs": true,
+            "displayMode": "single",
+            "locale": "en",
+            "colorTheme": "dark"
+        });
+        var container = document.getElementById("tradingview-widget-technical-analysis");
+        container.innerHTML = ""; // Clear previous content
+        container.appendChild(scriptTag);
+    }
+
+    // Function to replace the content in the SWOT analysis container
+    function changeSymbolswotAnalysis() {
+        var userInput = document.getElementById("symbolInput").value.trim(); // Get the user input from the symbol input field
+        var getUrl = "https://trendlyne.com/web-widget/swot-widget/Poppins/" + userInput + "/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E";
+        
+        var iframe = document.createElement('iframe');
+        iframe.src = getUrl;
+        iframe.style.width = "100%";
+        iframe.style.height = "500px"; // Adjust the height as needed
+        iframe.style.border = "none";
+        
+        var container = document.getElementById("swotanalysisContainer");
+        container.innerHTML = ''; // Clear previous content
+        container.appendChild(iframe);
+    }
+    function changeSymbolqvtAnalysis() {
+        var userInput = document.getElementById("symbolInput").value.trim(); // Get the user input from the symbol input field
+        var getUrl = "https://trendlyne.com/web-widget/qvt-widget/Poppins/" + userInput + "/?posCol=00A25B&primaryCol=006AFF&negCol=EB3B00&neuCol=F7941E";
+        
+        var iframe = document.createElement('iframe');
+        iframe.src = getUrl;
+        iframe.style.width = "100%";
+        iframe.style.height = "500px"; // Adjust the height as needed
+        iframe.style.border = "none";
+        
+        var container = document.getElementById("qvtnalysisContainer");
+        container.innerHTML = ''; // Clear previous content
+        container.appendChild(iframe);
+    }
+
+
+</script>
+
+</body>
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>

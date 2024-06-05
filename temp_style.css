@@ -1,0 +1,189 @@
+
+.bd
+{
+background-color: azure;
+}
+#image_text_div
+{
+border-radius: 13%;
+}
+#image_text_heading
+{
+  justify-content: right;
+  padding-top: 10%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: justify;
+}
+#image_text_paragraph
+{
+  justify-content: center;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding-top: 3%;
+}
+#image_above_text
+{
+size: 50%;
+justify-content: center;
+}
+#main_div_image_text
+{
+  width: 80%;
+  height: 80%;
+  margin-left: 5%;
+}
+
+/* #main_image_div
+{
+  justify-content: center;
+  padding-left: 10%;
+  padding-top: 5%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bolder;
+} */
+.navbar .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+#login_singup
+{
+    padding:auto;
+}
+#search
+{
+    height: auto;
+    width: auto;
+    padding:auto;
+    padding-right: 2%;
+    padding-left: 10%;
+}
+
+#search {
+    order: 3;
+}
+
+#login_singup {
+    order: 4;
+}
+
+.svg_image
+{
+    height: 100px;
+}
+.nav-item
+{
+  padding: 10px;
+}
+.carousel-item {
+  text-align: center;
+}
+
+/* Reduce image size */
+.carousel-item img {
+  max-width: 100%;
+  height: auto;
+  max-height: 500px; /* You can adjust this value as needed */
+}
+@media (max-width: 900px) {
+    #navbar_brand_image {
+     display: none;
+    }
+    #nav_tg
+    {
+       position: relative;
+       left: 10px;
+    }
+    #search {
+        position: absolute;
+        top: 10px;
+        left: 50%; /* Place the search form in the middle of the navbar */
+        transform: translateX(-60%);
+        z-index: 1001; /* Ensure the search form is above the navbar */
+      }
+      /* Styles for the login/signup button */
+    #login_singup {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Adjust the distance from the right side */
+    z-index: 1001; /* Ensure the button is above the navbar */
+  }
+    .navbar-toggler-icon
+    {
+       position: relative;
+       top: 30%;
+       left: 3%;
+    }
+    .navbar-toggler {
+        order: -1;
+        position: absolute;
+        top: 0;
+        left: 15px; /* Adjust the distance from the left side */
+        z-index: 1001; /* Ensure the toggler icon is above the navbar */
+      }
+      #image_above_text {
+        order: -1;
+      }
+  }
+  
+  @media only screen and (max-width: 900px) {
+    .col-sm-3 {
+      width: 50%; /* Two icons in a row */
+      float: left;
+    }
+  }
+  .box {
+    border-radius: 20px; /* Rounded corners */
+    transition: all 0.3s ease; /* Smooth transition */
+  }
+
+  .box:hover {
+    background-color: lightgray; /* Change background color on hover */
+  }
+
+  .box:hover img {
+    transform: scale(1.1); /* Increase size of image on hover */
+  }
+
+/*for image size increase mouse on it */
+/* Normal state */
+#img1,#img2,#img3
+{
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+#img1:hover,#img2:hover,#img3:hover
+{
+transform: scale(1.15); /* Increase size to 120% */
+}
+
+.footer_c
+{
+  background-color: rgba(2, 2, 2, 0.886);
+  color: aliceblue;
+  border-radius: 10px;
+}
+.aboutus
+{
+  text-align: justify;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 2%;
+}
+.footericon
+{
+  text-align: justify;
+  padding: 3%;
+}
+
+
+.slide-fwd-center {
+    animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+  
+  @keyframes slide-fwd-center {
+    0% {
+      transform: translateZ(0);
+    }
+    100% {
+      transform: translateZ(160px);
+    }
+  }
+  
+
